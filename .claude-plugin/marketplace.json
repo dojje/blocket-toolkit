@@ -11,7 +11,7 @@
       "source": "./",
       "skills": ["./skills/blocket-toolkit"],
       "strict": false,
-      "version": "0.1.1",
+      "version": "0.1.2",
       "description": "Search all of Blocket.se from the terminal: general items (torget), cars, boats, motorcycles and single ad details, with compact JSON output.",
       "author": {
         "name": "Daniel Hidefjäll",
