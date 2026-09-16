@@ -44,6 +44,36 @@ Verify with `blocket-toolkit --version`.
    keyboards. Search the brand instead (`kindle`, `kobo`, `pocketbook`, `storytel`,
    `boox`), add a `--price-min` floor to drop accessories, and narrow with
    `--sub-category`.
+8. **Report with a Markdown table and links**, never raw JSON. See *Reporting results to
+   the user* below.
+
+## Reporting results to the user
+
+Always turn the JSON into a Markdown table where every row links to the ad, then close
+with a short summary. Do not paste raw JSON at the user.
+
+| Price | Item | Location | Listed | Link |
+|---:|---|---|---|---|
+| 1 650 kr | Kobo Clara Colour, nyskick | Öjersjö | 2026-09-07 | [open](https://www.blocket.se/recommerce/forsale/item/26555604) |
+| 1 200 kr | Kobo Clara color e-reader med färg 6" | Göteborg | 2026-09-12 | [open](https://www.blocket.se/recommerce/forsale/item/26634355) |
+| 995 kr | Kobo Libra 2 + 2x Aura ONE, E-Ink | Sollentuna | 2026-08-30 | [open](https://www.blocket.se/recommerce/forsale/item/26312240) |
+
+Rules:
+
+- One row per ad. Sort by whatever the user cares about, price ascending by default.
+- The link is the `url` field from the JSON, labelled short (`open`, or the ad id).
+  Always make it clickable, and never print a bare id without a link.
+- Format price as `1 650 kr` with a space as thousands separator, Swedish style.
+- Add a `Listed` column from `published_at` when freshness matters, and a `Year` /
+  `Mileage` / `Length` / `Volume` column for vehicle searches. `-o table` shows these
+  directly, but the table you build for the user should carry the links too.
+- When you combined several searches, repeat the table under a bold heading per search,
+  for example `**Kobo**`, `**PocketBook**`, `**Other e-readers**`.
+- Print the exact command you ran below the table so the user can reproduce it.
+- Close with one or two lines: number of hits, price range, and any caveat, for example
+  "the broad term returned mostly accessories, so I filtered with `--price-min 300`".
+- For a single ad, use a two column `Field | Value` table instead of one line per field,
+  and include a link to the ad itself.
 
 ## Commands
 
