@@ -1,0 +1,24 @@
+{
+  "name": "dojje-skills",
+  "description": "Agent Skills by dojje. Portable SKILL.md skills that work in Claude Code, Codex, opencode, Copilot, Cursor and other Agent Skills compatible agents.",
+  "owner": {
+    "name": "Daniel Hidefjäll",
+    "url": "https://github.com/dojje"
+  },
+  "plugins": [
+    {
+      "name": "blocket-toolkit",
+      "source": "./",
+      "skills": ["./skills/blocket-toolkit"],
+      "strict": false,
+      "version": "0.1.1",
+      "description": "Search all of Blocket.se from the terminal: general items (torget), cars, boats, motorcycles and single ad details, with compact JSON output.",
+      "author": {
+        "name": "Daniel Hidefjäll",
+        "url": "https://github.com/dojje"
+      },
+      "category": "search",
+      "tags": ["blocket", "marketplace", "sweden", "second-hand", "cli", "cars", "boats", "motorcycles"]
+    }
+  ]
+}

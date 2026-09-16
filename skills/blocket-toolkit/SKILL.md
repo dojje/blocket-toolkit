@@ -2,6 +2,7 @@
 name: blocket-toolkit
 description: Search all of Blocket.se (Swedish marketplace) from the terminal. Covers general items (torget), cars, boats, motorcycles and full ad details. Use when the user wants to find, search, compare or look up anything on Blocket, including begagnade prylar, fynd, priser, bilar, båtar, motorcyklar and annonsdetaljer. Output is JSON by default.
 license: MIT
+compatibility: Requires the blocket-toolkit CLI on PATH (uv tool install blocket-toolkit) and network access to blocket.se
 ---
 
 # blocket-toolkit
