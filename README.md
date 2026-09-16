@@ -1,0 +1,154 @@
+# blocket-toolkit
+
+Search **all of Blocket.se** from the terminal — general items (*torget*), cars, boats
+and motorcycles — with clean JSON output that is easy to pipe into other tools or hand
+to an LLM.
+
+Built on top of the [`blocket-api`](https://pypi.org/project/blocket_api/) Python
+package.
+
+## Features
+
+- **Everything on Blocket**: torget, cars, boats, motorcycles and full ad details.
+- **Full filter surface**: category + subcategory, all 21 regions, price, year, milage,
+  horsepower, colour, gearbox, wheel drive, length, engine volume, brand/model.
+- **AI-friendly output**: compacted, flat JSON by default; `jsonl` and text `table` when
+  you want them.
+- **Self-documenting enums**: every category, subcategory, region, brand and model can
+  be listed or resolved by name *or* by Blocket's internal id.
+- **Pagination**: `--page`, `-n/--limit`, or `--all`.
+
+## Install
+
+```bash
+uv tool install blocket-toolkit          # or: pip install blocket-toolkit
+```
+
+From a checkout:
+
+```bash
+git clone https://github.com/dojje/blocket-toolkit
+cd blocket-toolkit
+uv venv && uv pip install -e '.[dev]'
+```
+
+## Quick start
+
+```bash
+blocket-toolkit search "kindle" --price-max 800 --sort price_asc
+
+blocket-toolkit search "grafikkort" -c elektronik_och_vitvaror --sub-category datorer -n 5
+
+blocket-toolkit cars --model volvo --year-min 2018 --mileage-max 12000 --sort mileage_asc
+
+blocket-toolkit boats --type segelbat_motorseglare --length-min 30
+
+blocket-toolkit mc --model yamaha --engine-min 600 --price-max 80000
+
+blocket-toolkit ad 20851738 --type recommerce
+```
+
+Every command accepts `-o json|jsonl|table` (default `json`).
+
+## Commands
+
+| Command | What it does |
+|---|---|
+| `search <query>` | General items on torget |
+| `cars [query]` | Used cars |
+| `boats [query]` | Used boats |
+| `mc [query]` | Used motorcycles |
+| `ad <ad_id> --type ...` | Full details for one listing |
+| `categories` | All 11 top-level categories |
+| `subcategories [-c CATEGORY]` | All subcategories, optionally for one category |
+| `locations` | All 21 Swedish regions |
+| `car-options` | Car brands, colours, gearboxes, wheel drives, sort orders |
+| `boat-options` | Boat types and sort orders |
+| `mc-options` | MC brands, types and sort orders |
+
+Run `blocket-toolkit <command> --help` for the full filter list.
+
+### Common flags
+
+| Flag | Applies to | Meaning |
+|---|---|---|
+| `-c, --category` | `search` | Category name or id (e.g. `elektronik_och_vitvaror` or `0.93`) |
+| `--sub-category` | `search` | Subcategory name or id (mutually exclusive with `--category`) |
+| `-l, --location` | all searches | Region(s), repeatable or comma-separated (`-l stockholm,skane`) |
+| `--sort` | all searches | Sort order; valid values depend on the command |
+| `--price-min/--price-max` | `search`, `cars`, `boats`, `mc` | Price range in SEK |
+| `--newer-than HOURS` | `search` | Only ads published within the last N hours |
+| `--page`, `-n/--limit`, `--all` | all searches | Pagination |
+| `-o, --output` | everything | `json` (default), `jsonl`, `table` |
+| `--raw` | searches | Return Blocket's raw objects instead of compacted records |
+
+> `--price-min/--price-max` and `--newer-than` are applied **client-side** for torget,
+> because Blocket's general search endpoint has no server-side price filter. For cars,
+> boats and motorcycles the price range is sent to the API.
+
+## Output shape
+
+Search commands return:
+
+```json
+{
+  "page": 1,
+  "last_page": 20,
+  "total": 1187,
+  "count": 40,
+  "items": [
+    {
+      "id": 20851738,
+      "heading": "Kindle Paperwhite 11th gen",
+      "price": 750,
+      "location": "Stockholm",
+      "url": "https://www.blocket.se/annons/20851738",
+      "image_url": "https://...",
+      "timestamp": 1700000000000,
+      "published_at": "2023-11-14T22:13:20+00:00"
+    }
+  ]
+}
+```
+
+`ad` returns the full payload for a single listing.
+
+## Finding valid filter values
+
+```bash
+blocket-toolkit categories -o table
+blocket-toolkit subcategories -c elektronik_och_vitvaror -o table
+blocket-toolkit locations -o table
+blocket-toolkit car-options -o table
+```
+
+Values are resolved case-insensitively and accept spaces or dashes, so
+`ELEKTRONIK_OCH_VITVAROR`, `elektronik och vitvaror` and `0.93` are all valid.
+
+## Development
+
+```bash
+uv venv && uv pip install -e '.[dev]'
+pytest                 # unit tests (no network)
+pytest -m live         # smoke tests against the real Blocket API
+ruff check .
+```
+
+## Notes and limitations
+
+- Blocket has no official public API; this uses the same internal endpoints as the
+  website. Be gentle: don't hammer it with `--all --max-pages 200`.
+- Torget's search endpoint does not accept a result count, so `-n/--limit` and
+  `--price-*` are applied after fetching.
+- `ad` for `car`/`boat`/`mc` scrapes the mobility page and returns somewhat less
+  structured data than `recommerce`.
+
+## Credits
+
+- [`blocket-api`](https://github.com/dunderrrrrr/blocket_api) by dunderrrrrr — the
+  underlying API wrapper.
+- Blocket.se, obviously, for the data.
+
+## License
+
+MIT — see [LICENSE](LICENSE).

@@ -1,0 +1,53 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "blocket-toolkit"
+version = "0.1.0"
+description = "Search all of Blocket.se from the terminal — general items, cars, boats and motorcycles."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Daniel Hidefjäll" }]
+keywords = ["blocket", "cli", "marketplace", "sweden", "second-hand", "cars", "boats"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Utilities",
+]
+dependencies = ["blocket-api>=0.5.2", "httpx>=0.28.1"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.6"]
+
+[project.urls]
+Homepage = "https://github.com/dojje/blocket-toolkit"
+Repository = "https://github.com/dojje/blocket-toolkit"
+Issues = "https://github.com/dojje/blocket-toolkit/issues"
+
+[project.scripts]
+blocket-toolkit = "blocket_toolkit.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/blocket_toolkit"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["live: tests that hit the real Blocket API (deselected by default)"]
+addopts = "-m 'not live'"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
