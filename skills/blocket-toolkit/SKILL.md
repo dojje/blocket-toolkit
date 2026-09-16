@@ -18,7 +18,8 @@ Everything is read-only. There is no login, no watchlist, no messaging.
 The command is `blocket-toolkit`. If it is missing, install it:
 
 ```bash
-uv tool install blocket-toolkit          # after it is published
+uv tool install blocket-toolkit          # from PyPI
+uv tool install git+https://github.com/dojje/blocket-toolkit  # from git
 # or, from a checkout:
 uv tool install --editable /path/to/blocket-toolkit
 ```
