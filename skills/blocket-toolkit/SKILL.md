@@ -1,6 +1,7 @@
 ---
 name: blocket-toolkit
-description: Search all of Blocket.se (Swedish marketplace) from the terminal: general items (torget), cars, boats, motorcycles and full ad details. Use when the user wants to find, search, compare or look up anything on Blocket: begagnade prylar, fynd, priser, bilar, båtar, motorcyklar, annonsdetaljer. Output is JSON by default.
+description: Search all of Blocket.se (Swedish marketplace) from the terminal. Covers general items (torget), cars, boats, motorcycles and full ad details. Use when the user wants to find, search, compare or look up anything on Blocket, including begagnade prylar, fynd, priser, bilar, båtar, motorcyklar and annonsdetaljer. Output is JSON by default.
+license: MIT
 ---
 
 # blocket-toolkit
