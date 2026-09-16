@@ -44,13 +44,12 @@ Verify with `blocket-toolkit --version`.
    keyboards. Search the brand instead (`kindle`, `kobo`, `pocketbook`, `storytel`,
    `boox`), add a `--price-min` floor to drop accessories, and narrow with
    `--sub-category`.
-8. **Report with a Markdown table and links**, never raw JSON. See *Reporting results to
-   the user* below.
 
 ## Reporting results to the user
 
-Always turn the JSON into a Markdown table where every row links to the ad, then close
-with a short summary. Do not paste raw JSON at the user.
+Prefer turning the JSON into a Markdown table where every row links to the ad, then
+close with a short summary. Raw JSON is fine when the user asks for it or wants to
+process it themselves.
 
 | Price | Item | Location | Listed | Link |
 |---:|---|---|---|---|
