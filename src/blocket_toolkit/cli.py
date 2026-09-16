@@ -88,7 +88,7 @@ def _build_parser() -> argparse.ArgumentParser:
 
     parser = argparse.ArgumentParser(
         prog="blocket-toolkit",
-        description="Search all of Blocket.se — general items, cars, boats and motorcycles.",
+        description="Search all of Blocket.se: general items, cars, boats and motorcycles.",
     )
     parser.add_argument(
         "--version", action="version", version=f"blocket-toolkit {__version__}"

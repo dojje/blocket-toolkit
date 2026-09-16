@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "blocket-toolkit"
 version = "0.1.0"
-description = "Search all of Blocket.se from the terminal — general items, cars, boats and motorcycles."
+description = "Search all of Blocket.se from the terminal: general items, cars, boats and motorcycles."
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"

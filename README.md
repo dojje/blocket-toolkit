@@ -1,7 +1,7 @@
 # blocket-toolkit
 
-Search **all of Blocket.se** from the terminal — general items (*torget*), cars, boats
-and motorcycles — with clean JSON output that is easy to pipe into other tools or hand
+Search **all of Blocket.se** from the terminal: general items (*torget*), cars, boats
+and motorcycles, with clean JSON output that is easy to pipe into other tools or hand
 to an LLM.
 
 Built on top of the [`blocket-api`](https://pypi.org/project/blocket_api/) Python
@@ -145,10 +145,10 @@ ruff check .
 
 ## Credits
 
-- [`blocket-api`](https://github.com/dunderrrrrr/blocket_api) by dunderrrrrr — the
+- [`blocket-api`](https://github.com/dunderrrrrr/blocket_api) by dunderrrrrr, the
   underlying API wrapper.
 - Blocket.se, obviously, for the data.
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT. See [LICENSE](LICENSE).
